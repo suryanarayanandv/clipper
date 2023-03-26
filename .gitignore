@@ -1,0 +1,8 @@
+# dependencies
+node_modules/
+
+# tester
+test.js
+
+# vscode
+.vscode

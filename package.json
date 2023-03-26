@@ -1,0 +1,20 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "helloworld",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "electron ."
+  },
+  "author": "suryalays",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^23.0.0"
+  },
+  "dependencies": {
+    "electron-positioner": "^4.1.0",
+    "screen-size-detector": "^1.0.4",
+    "virtualenv": "^0.3.1"
+  }
+}
