@@ -7,52 +7,48 @@ const clip = os.type() === 'linux' ? require('./clip_ubutnu.js') : require('./cl
 
 const {screen} = require('electron');
 
-
-
-setInterval(() => {
-  const curr = clip.clipInfo();
-  // const curr = clip.clipInfo().CLIP_NEW ?
-  const curr_clip = curr.CLIP_NEW ? curr.CURRENT_CLIP : 'OLD  ';
-
-  if (curr_clip != 'OLD') {
-    /**
-     * UPDATE CLIP RENDERER
-     */
-    console.log(clipboard.readText())
-  }
-
-}, 1000);
-
 function createWindow() {
   const win = new BrowserWindow({
     width: 300,
     height: 400,
     webPreferences: {
-      preload: "preload.js",
+      preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
-      devTools: true
+      devTools: true,
     },
     
   });
   win.loadURL(path.join(__dirname, "../public/index.html"));
+  return win
 }
 
 
 Menu.setApplicationMenu(menu);
 
 app.whenReady().then(() => {
-  createWindow();
-
-  /**
-   * get screen details
-   */
-
-  const mainScreen = screen.getPrimaryDisplay();
-  const allScreen = screen.getAllDisplays();
-
-  console.log(mainScreen)
+  win = createWindow();
+  win.webContents.openDevTools()
 });
 
+/**
+ * Check for new clips
+ * Resolve Promise?
+ */
+ipcMain.handle('updateClip', (event) => {
+  const curr = clip.clipInfo();
+  const curr_clip = curr.CLIP_NEW ? curr.CURRENT_CLIP : "OLD";
+
+  if (curr_clip != "OLD") {
+    console.log(curr_clip)
+    return curr_clip;
+  } else {
+    return "OLD";
+  }
+})
+
+/**
+ * Controllers
+ */
 app.on("window-all-closed", () => {
   app.quit();
 });

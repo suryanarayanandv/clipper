@@ -5,10 +5,7 @@
  */
 
 const { contextBridge, ipcRenderer } = require("electron");
-const os = require('node:os');
 
-contextBridge.exposeInMainWorld('clip', {
-    osType: os.type(),
-    updateClip: os.type() === 'linux' ? ipcRenderer.invoke('updateLinux') : ipcRenderer.invoke('updateWin')
+contextBridge.exposeInMainWorld("clip", {
+  updateClip: async () => await ipcRenderer.invoke("updateClip"),
 });
-

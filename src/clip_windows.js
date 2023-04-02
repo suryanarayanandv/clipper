@@ -1,4 +1,4 @@
-const { execFile } = require("child_process");
+const { execFile, execFileSync } = require("child_process");
 
 let clipInfo = {
     PREV_CLIP: '',
@@ -6,8 +6,8 @@ let clipInfo = {
     CLIP_NEW: false
 }
 
-const content = () => {
-  execFile("powershell", ["Get-Clipboard"], (error, stdout, stderr) => {
+const content = async () => {
+  await execFile("powershell", ["Get-Clipboard"], (error, stdout, stderr) => {
     if (error) {
         console.log(error);
     }

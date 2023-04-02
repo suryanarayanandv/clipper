@@ -6,8 +6,8 @@ let clipInfo = {
   CLIP_NEW: false,
 };
 
-const content = () => {
-  execFile("xclip", ["-out", "clipboard"], (error, stdout, stderr) => {
+const content = async () => {
+  await execFile("xclip", ["-out", "clipboard"], (error, stdout, stderr) => {
     if (error) {
       console.log(error);
     }
