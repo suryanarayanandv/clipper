@@ -6,8 +6,8 @@ let clipInfo = {
     CLIP_NEW: false
 }
 
-const content = async () => {
-  await execFile("powershell", ["Get-Clipboard"], (error, stdout, stderr) => {
+const content = () => {
+  execFile("powershell", ["Get-Clipboard"], (error, stdout, stderr) => {
     if (error) {
         console.log(error);
     }

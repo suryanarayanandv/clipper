@@ -7,5 +7,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("clip", {
-  updateClip: async () => await ipcRenderer.invoke("updateClip"),
+  updateClip: () => ipcRenderer.invoke("updateClip").then((value) => value),
 });

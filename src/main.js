@@ -37,11 +37,10 @@ app.whenReady().then(() => {
 ipcMain.handle('updateClip', (event) => {
   const curr = clip.clipInfo();
   const curr_clip = curr.CLIP_NEW ? curr.CURRENT_CLIP : "OLD";
-
   if (curr_clip != "OLD") {
-    console.log(curr_clip)
     return curr_clip;
   } else {
+    console.log('OLD');
     return "OLD";
   }
 })
