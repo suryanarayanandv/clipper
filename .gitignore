@@ -6,3 +6,5 @@ test.js
 
 # vscode
 .vscode
+out/
+dev.notes.md

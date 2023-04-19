@@ -7,10 +7,13 @@ const clip = os.type() === 'linux' ? require('./clip_ubutnu.js') : require('./cl
 
 const {screen} = require('electron');
 
+if (require("electron-squirrel-startup")) app.quit();
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 300,
     height: 400,
+    icon: '../assets/images/icon.png',
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
